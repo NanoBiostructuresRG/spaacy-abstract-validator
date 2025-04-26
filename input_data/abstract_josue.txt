@@ -1,0 +1,10 @@
+# background
+The increasing accumulation of radioactive waste resulting from nuclear disasters has intensified the search for advanced materials capable of mitigating its environmental impact. Among the most promising candidates are molybdenum disulfide (MoS2) and MXenes. It has been reported that suggest that MXenes can be passivated with sulfur or molybdenum, potentially forming stable heterostructures with MoS2 monolayers. 
+# hypothesis
+In this context, the 2H phase of MoS2 is expected to stabilize copper-based MXenes by enabling orbital hybridization at the interface between sulfur and copper atoms. This electronic interaction may improve the structural integrity of the heterostructures, particularly under conditions relevant to radionuclide immobilization. 
+# methodology
+First-principles simulations based on density functional theory (DFT) will be employed to model the electronic structure and interfacial behavior of MoS2-MXene (M = Ti, Cu; X = N, C) systems in the presence of representative radionuclides (Po, Tc, Sr, Ba and Cs). To improve accuracy, hybrid functionals (HSE06) will be used to better capture exchange�correlation effects, and dispersion corrections (DFT-D3) will account for van der Waals interactions. For heavy elements, relativistic effects and spin-orbit coupling will be included where necessary. This proposal aims to evaluate whether such interactions give rise to energetically favorable heterostructures stabilized by d-orbital hybridization. 
+# outcomes
+Theoretical insights derived from the proposed simulations will guide the development of functional materials for radionuclide immobilization, supporting broader efforts in environmental remediation and the long-term management of radioactive waste.
+# impact
+Towards sustainable and secure nuclear technologies, the development of two-dimensional materials with tailored electronic properties can offer a promising pathway for the safe containment of radioactive waste, ultimately contributing to the minimization of ecological risks associated with nuclear energy. 

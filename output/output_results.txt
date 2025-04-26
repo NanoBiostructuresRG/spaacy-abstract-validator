@@ -1,0 +1,69 @@
+==================================================
+       SCIENTIFIC PROPOSAL ABSTRACT ANALIZER
+        Natural Language Processing (SpaCy)
+--------------------------------------------------
+Developer: Flavio F. Contreras-Torres
+Version: v.1.0 - Oviedo
+Execution Date: 2025-04-26 15:36:21
+--------------------------------------------------
+GitHub: https://github.com/NanoBiostructuresRG
+==================================================
+
+[1. BACKGROUND VALIDATION]
+
+No clear problem statement found (+0)
+No justification or context provided (+0)
+Key concept introduced (+1)
+No explicit knowledge gap identified (+0)
+
+BKG_SCORE: 12.5%
+
+
+[2. HYPOTHESIS VALIDATION]
+
+Hypothesis tone may be too weak or informal (+0)
+Relationship between variables is stated (+3)
+Hypothesis may lack scientific specificity (+0)
+No Bloom-level verbs detected.
+
+HYP_SCORE: 30.0%
+
+
+[3. METHODOLOGY VALIDATION]
+
+Future tense used to indicate planned actions.
+Technical terms or methods mentioned.
+Techniques are associated with analytical/evaluative purpose verbs.
+Bloom level: MEDIUM (via synonym)
+
+METH_SCORE: 88.0%
+
+
+[4. EXPECTED OUTCOMES VALIDATION]
+
+Tone may be too speculative or weak (+0)
+Future-oriented verbs detected (+3)
+Bloom level: HIGH (via synonym)
+
+OUT_SCORE: 62.0%
+
+
+[5. IMPACT VALIDATION]
+
+Uses direct or contextually strong scientific tone (+3)
+No future projection detected (+0)
+No Bloom-level verbs detected.
+
+IMPACT_SCORE: 30.0%
+
+
+[6. ETHICS VALIDATION]
+
+No explicit mention of ethical approval or considerations (+0)
+
+ETHICS_SCORE: 0.0%
+
+
+[7. ABSTRACT SUMMARY]
+
+This project aims to validate one or two natural compounds with modulatory potential in a mouse model of obesity with induced heart failure, determining their cardioprotective effects and the pathways involved in the regulation of mitochondrial oxidative stress and Ca�? overload. Candidates will be selected based on a theoretical-experimental approach that includes in vitro evaluations in H9c2 cardiomyocytes with angiotensin II-induced hypertrophy, in vivo evaluations in C57BL/6J mice with induced heart failure, and ex vivo evaluations in cardiac tissue. Validation of safe and selective therapeutic modulators of PPARs could restore impaired energy metabolism and mitochondrial function, thereby preventing the progression of mitochondrial dysfunction, supporting their development as a rational strategy.

@@ -1,0 +1,17 @@
+# background
+Peroxisome proliferator-activated receptors (PPARs) are key nuclear transcription factors regulating lipid and glucose metabolism. The PPARa, PPARb/d, and PPARg subtypes have been proposed as relevant therapeutic targets in metabolic diseases such as type 2 diabetes, obesity, and various cardiovascular conditions.
+
+# hypothesis
+Experimental evidence suggests a causal role for PPARs in adipose tissue accumulation and the development of insulin resistance. Agonist compounds activate PPARs under conditions of energy deprivation or increase their expression with exercise, reinforcing their role in energy homeostasis. Therefore, modulating PPARs through selective ligands is considered a strategy to restore metabolic balance and intervene in altered biological pathways in obesity-associated pathologies. This project aims to validate one or two natural compounds with modulatory potential in a mouse model of obesity with induced heart failure, determining their cardioprotective effects and the pathways involved in the regulation of mitochondrial oxidative stress and Ca�? overload.
+
+# methodology
+Candidates will be selected based on a theoretical-experimental approach that includes in vitro evaluations in H9c2 cardiomyocytes with angiotensin II-induced hypertrophy, in vivo evaluations in C57BL/6J mice with induced heart failure, and ex vivo evaluations in cardiac tissue. Selection will be performed using machine learning, ADMET, and protein-ligand studies. 
+
+# outcomes
+Prioritized compounds will be integrated into a publicly available, targeted chemical library with functional, pharmacological, and biosynthetic profiles.
+
+# impact
+Validation of safe and selective therapeutic modulators of PPARs could restore impaired energy metabolism and mitochondrial function, thereby preventing the progression of mitochondrial dysfunction, supporting their development as a rational strategy.
+
+# keywords
+PPARs, modulators, bioactive compounds, metabolic syndrome, obesity

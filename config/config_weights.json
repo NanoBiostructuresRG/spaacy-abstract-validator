@@ -1,0 +1,33 @@
+{
+  "BACKGROUND": {
+    "problem": 2,
+    "justification": 2,
+    "concept": 1,
+    "knowledge_gap": 3
+  },
+  "HYPOTHESIS": {
+    "tone": 2,
+    "relation": 3,
+    "domain": 2,
+    "bloom": 3
+  },
+  "METHODOLOGY": {
+    "future": 2,
+    "technique": 2,
+    "purpose": 3,
+    "bloom": 3
+  },
+  "OUTCOMES": {
+    "tone": 3,
+    "future": 3,
+    "bloom": 4
+  },
+  "IMPACT": {
+    "tone": 3,
+    "future": 3,
+    "bloom": 4
+  },
+  "ETHICS": {
+    "mention": 5
+  }
+}
