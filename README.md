@@ -1,6 +1,9 @@
 # Abstract Validator - Scientific Proposal Analyzer (OOP Edition)
 Version 1.0.0 - Oviedo
 
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ## Description
 This tool automatically validates scientific proposal abstracts, analyzing their structure and language section by section.
 Now redesigned using a fully object-oriented architecture (OOP) for greater clarity, maintainability, and scalability.
