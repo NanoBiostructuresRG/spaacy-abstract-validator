@@ -1,15 +1,14 @@
 # SPAA: Scientific Proposal Abstract Analyzer
-**Version 1.0.0 - Oviedo, Spain**
+**Version 1.0.0 - April, 2025. Oviedo**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[![Version](https://img.shields.io/badge/version-v1.1-blue.svg)]()
+[![Version](https://img.shields.io/badge/version-v1.0-blue.svg)]()
 
 ---
 
 ## Description
-**SPAA** is a toolkito to automatically validates scientific proposal abstracts, analyzing their structure and language section by section.
-Now redesigned using a fully object-oriented architecture (OOP) for greater clarity, maintainability, and scalability.
+**SPAA** is a toolkit to automatically validates scientific proposal abstracts, analyzing their structure and language section by section: background, hypothesis, methods, expected outcomes, social impact, and ethics.
 
 ---
 
