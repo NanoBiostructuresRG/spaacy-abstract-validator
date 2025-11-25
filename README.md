@@ -1,12 +1,17 @@
-# Abstract Validator - Scientific Proposal Analyzer (OOP Edition)
-Version 1.0.0 - Oviedo
+# SPAA: Scientific Proposal Abstract Analyzer
+**Version 1.0.0 - Oviedo, Spain**
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+[![Version](https://img.shields.io/badge/version-v1.1-blue.svg)]()
+
+---
 
 ## Description
-This tool automatically validates scientific proposal abstracts, analyzing their structure and language section by section.
+**SPAA** is a toolkito to automatically validates scientific proposal abstracts, analyzing their structure and language section by section.
 Now redesigned using a fully object-oriented architecture (OOP) for greater clarity, maintainability, and scalability.
+
+---
 
 ## Purpose
 Automatically evaluate whether an abstract:
@@ -17,9 +22,11 @@ Automatically evaluate whether an abstract:
 - Anticipates relevant scientific or societal impact.
 - Provides a concise and focused abstract summary using keyword-driven prioritization.
 
+---
+
 ## Project Structure
-```
-abstract_validator/
+```text
+SPAA/
 ├── abstract_validator.py       # Orchestrates the validation pipeline (main OOP engine)
 ├── loader.py                   # Class to load input text and configuration files
 ├── background_analysis.py      # Background section validator
@@ -40,6 +47,8 @@ abstract_validator/
 └── README.md   
 ```
 
+---
+
 ## Dependencies
 - Python 3.10
 - SpaCy
@@ -49,6 +58,8 @@ Install dependencies with:
 pip install spacy
 python -m spacy download en_core_web_sm
 ```
+
+---
 
 ## How to Run
 From the root folder:
@@ -77,6 +88,8 @@ Make sure your input file (`abstract_file.txt`) inside `input_data/` follows thi
 keyword1, keyword2, keyword3, ..., keyword5
 ```
 
+---
+
 ## Output
 A console message and a saved file under `output/`, containing:
 - Validation feedback section by section
@@ -90,13 +103,14 @@ Keywords matched: 3 of 5
 Validation completed. Results saved to: output/output_results.txt
 ```
 
+---
+
 ## Notes
 - All keyword rules and scoring weights can be customized via JSON files (`config/` folder).
 - Bloom verb detection includes synonyms to ensure broader linguistic coverage.
 - Designed for scientific proposal abstracts, not intended for finalized manuscripts.
 
-## Authors
-Developed by Flavio F. Contreras-Torres (Tecnologico de Monterrey) for academic use and educational purposes.
+---
 
 ## Future Extensions
 - Adding new modules: literature review validation.
@@ -104,3 +118,19 @@ Developed by Flavio F. Contreras-Torres (Tecnologico de Monterrey) for academic 
 - Building a simple web app interface (Flask/FastAPI).
 - Extending to multi-language suppoort (e.g., Spanish abstract).
 
+---
+
+## Author
+Developed by **Flavio F. Contreras-Torres** (Tecnológico de Monterrey) for academic use and educational purposes.
+Oviedo, Spain - April 2025
+
+---
+
+## Versions
+v.1.0.0 - April 2025
+
+---
+
+## License
+This project is licensed under the terms of the [MIT License](https://github.com/NanoBiostructuresRG/molraptor/blob/main/LICENSE).  
+See the LICENSE file for full details.
