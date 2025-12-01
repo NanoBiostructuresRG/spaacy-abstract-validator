@@ -1,9 +1,11 @@
-# abstract_validator.py - OOP version of the Abstract Validator
+# abstract_validator.py - version 1.1
 
 import spacy
-import datetime
 import os
 import re
+import datetime
+import argparse
+
 from config import INPUT_FILE, CONFIG_FILE, WEIGHT_FILE, OUTPUT_FILE
 from loader import Loader
 from background_analysis import BackgroundValidator
@@ -16,12 +18,26 @@ from summarizer import Summarizer
 
 
 class AbstractValidator:
-    def __init__(self, input_file, config_file, weight_file, output_file):
-        self.loader = Loader(input_file, config_file, weight_file)
+    def __init__(self, input_file, config_file, weight_file, output_file,
+                 domain_tag: str | None = None,
+                 lexicon_dir: str = "lexicon"):
+        """
+        domain_tag: optional curated lexicon tag (e.g., 'pparg', 'obesity')
+        lexicon_dir: base directory for lexicon/<tag>/lexicon_<tag>.csv
+        """
+        self.loader = Loader(
+            input_file, 
+            config_file, 
+            weight_file,
+            lexicon_dir=lexicon_dir,
+            domain_tag=domain_tag
+        )
         self.output_file = output_file
+        self.domain_tag = domain_tag
         self.nlp = spacy.load("en_core_web_sm")
         self.results = []
         self.keywords = []
+        self.domain_lexicon = None 
 
     def load_resources(self):
         self.config = self.loader.load_config()
@@ -29,6 +45,9 @@ class AbstractValidator:
         raw_text = self.loader.load_text()
         background, hypothesis, methodology, outcomes, impact, keywords = self.loader.split_sections(raw_text)
         self.keywords = keywords
+
+        self.domain_lexicon = self.loader.load_domain_lexicon()
+        
         self.background_doc = self.nlp(background)
         self.hypothesis_doc = self.nlp(hypothesis)
         self.methodology_doc = self.nlp(methodology)
@@ -46,21 +65,30 @@ class AbstractValidator:
     def add_header(self):
         now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         header = [
-            "==================================================",
-            "       SCIENTIFIC PROPOSAL ABSTRACT ANALIZER",
-            "        Natural Language Processing (SpaCy)",
-            "--------------------------------------------------",
+            "========================================================",
+            "      SPAA: SCIENTIFIC PROPOSAL ABSTRACT ANALIZER",
+            "        ",
+            "--------------------------------------------------------",
+            " A domain-aware expert system for evaluating scientific",
+            " proposal abstracts using NLP-spaCy and curated lexicons.",
+            "--------------------------------------------------------",
             "Developer: Flavio F. Contreras-Torres",
-            "Version: v.1.0 - Oviedo",
+            "Version: v.1.0 - May, 2025. Oviedo",
+            "Version: v.1.1 - November, 2025. Monterrey",
             f"Execution Date: {now}",
-            "--------------------------------------------------",
+            "--------------------------------------------------------",
             "GitHub: https://github.com/NanoBiostructuresRG",
-            "==================================================\n"
+            "========================================================\n"
         ]
         self.results.extend(header)
 
     def validate_background(self):
-        validator = BackgroundValidator(self.background_doc, self.config, self.weights["BACKGROUND"])
+        validator = BackgroundValidator(
+            self.background_doc, 
+            self.config, 
+            self.weights["BACKGROUND"],
+            domain_lexicon=self.domain_lexicon
+        )
         feedback, score = validator.validate()
         self.results.append("[1. BACKGROUND VALIDATION]\n")
         self.results.extend(feedback)
@@ -72,7 +100,8 @@ class AbstractValidator:
             self.config,
             self.weights["HYPOTHESIS"],
             self.config["BLOOM_VERBS"],
-            self.config["BLOOM_SYNONYMS"]
+            self.config["BLOOM_SYNONYMS"],
+            domain_lexicon=self.domain_lexicon 
         )
         feedback, score = validator.validate()
         self.results.append("\n[2. HYPOTHESIS VALIDATION]\n")
@@ -84,7 +113,8 @@ class AbstractValidator:
             self.methodology_doc,
             self.config["BLOOM_VERBS"],
             self.config["BLOOM_SYNONYMS"],
-            self.weights["METHODOLOGY"]
+            self.weights["METHODOLOGY"],
+            # domain_lexicon=self.domain_lexicon  # optional
         )
         feedback, score = validator.validate()
         self.results.append("\n[3. METHODOLOGY VALIDATION]\n")
@@ -96,7 +126,8 @@ class AbstractValidator:
             self.outcomes_doc,
             self.config["BLOOM_VERBS"],
             self.config["BLOOM_SYNONYMS"],
-            self.weights["OUTCOMES"]
+            self.weights["OUTCOMES"],
+            # domain_lexicon=self.domain_lexicon  # optional
         )
         feedback, score = validator.validate()
         self.results.append("\n[4. EXPECTED OUTCOMES VALIDATION]\n")
@@ -108,7 +139,8 @@ class AbstractValidator:
             self.impact_doc,
             self.config["BLOOM_VERBS"],
             self.config["BLOOM_SYNONYMS"],
-            self.weights["IMPACT"]
+            self.weights["IMPACT"],
+            # domain_lexicon=self.domain_lexicon  # optional
         )
         feedback, score = validator.validate()
         self.results.append("\n[5. IMPACT VALIDATION]\n")
@@ -129,27 +161,24 @@ class AbstractValidator:
     def summarize_abstract(self):
         full_text = " ".join(self.sections)
         full_doc = self.nlp(full_text)
-        if self.keywords:
-            full_text_lower = full_text.lower()
+        full_text_lower = full_text.lower()
+
             
         matched_keywords = []
         for kw in self.keywords:
             if kw.lower() in full_text_lower:
                 matched_keywords.append(kw)
-        if matched_keywords:
-            print(f"Keywords matched: {len(matched_keywords)} of {len(self.keywords)}")
-        else:
-            print(f"Warning: No keywords were detected in the abstract. Summary generated without keyword influence.")
+
+        if self.keywords:
+            if matched_keywords:
+                print(f"Keywords matched: {len(matched_keywords)} of {len(self.keywords)}")
+            else:
+                print(f"Warning: No keywords were detected in the abstract. Summary generated without keyword influence.")
        
         summarizer = Summarizer(full_doc, keywords=self.keywords)
         summary = summarizer.summarize()
         self.results.append("\n[7. ABSTRACT SUMMARY]\n")
         self.results.append(summary)
-
-    def save_results(self):
-        with open(self.output_file, "w", encoding="utf-8") as f:
-            f.write("\n".join(self.results))
-        print(f"Validation completed. Results saved to: {self.output_file}")
     
     def save_results(self):
         os.makedirs(os.path.dirname(self.output_file), exist_ok=True)
@@ -170,7 +199,17 @@ class AbstractValidator:
         self.summarize_abstract()
         self.save_results()
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="SPAA - Scientific Proposal Abstract Analyzer")
+    parser.add_argument(
+        "--tag",
+        type=str,
+        default=None,
+        help="Domain tag to activate a curated lexicon (e.g., pparg, obesity, cb1)."
+    )
+    return parser.parse_args()
 
 if __name__ == "__main__":
-    validator = AbstractValidator(INPUT_FILE, CONFIG_FILE, WEIGHT_FILE, OUTPUT_FILE)
+    args = parse_args()
+    validator = AbstractValidator(INPUT_FILE, CONFIG_FILE, WEIGHT_FILE, OUTPUT_FILE, domain_tag=args.tag)
     validator.run()
