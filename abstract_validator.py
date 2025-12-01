@@ -14,7 +14,7 @@ from methodology_analysis import MethodologyValidator
 from outcomes_analysis import OutcomesValidator
 from impact_analysis import ImpactValidator
 from ethics_analysis import EthicsValidator
-from summarizer import Summarizer
+from summarizer import StructuredSummarizer
 
 
 class AbstractValidator:
@@ -37,7 +37,7 @@ class AbstractValidator:
         self.nlp = spacy.load("en_core_web_sm")
         self.results = []
         self.keywords = []
-        self.domain_lexicon = None 
+        self.domain_lexicon = None   # <<< place to keep save the lexicon
 
     def load_resources(self):
         self.config = self.loader.load_config()
@@ -46,6 +46,7 @@ class AbstractValidator:
         background, hypothesis, methodology, outcomes, impact, keywords = self.loader.split_sections(raw_text)
         self.keywords = keywords
 
+        # Cargar lexicon de dominio (si domain_tag fue proporcionado)
         self.domain_lexicon = self.loader.load_domain_lexicon()
         
         self.background_doc = self.nlp(background)
@@ -101,7 +102,7 @@ class AbstractValidator:
             self.weights["HYPOTHESIS"],
             self.config["BLOOM_VERBS"],
             self.config["BLOOM_SYNONYMS"],
-            domain_lexicon=self.domain_lexicon 
+            domain_lexicon=self.domain_lexicon # opcional
         )
         feedback, score = validator.validate()
         self.results.append("\n[2. HYPOTHESIS VALIDATION]\n")
@@ -114,7 +115,7 @@ class AbstractValidator:
             self.config["BLOOM_VERBS"],
             self.config["BLOOM_SYNONYMS"],
             self.weights["METHODOLOGY"],
-            # domain_lexicon=self.domain_lexicon  # optional
+            # domain_lexicon=self.domain_lexicon  # opcional
         )
         feedback, score = validator.validate()
         self.results.append("\n[3. METHODOLOGY VALIDATION]\n")
@@ -127,7 +128,7 @@ class AbstractValidator:
             self.config["BLOOM_VERBS"],
             self.config["BLOOM_SYNONYMS"],
             self.weights["OUTCOMES"],
-            # domain_lexicon=self.domain_lexicon  # optional
+            # domain_lexicon=self.domain_lexicon  # opcional
         )
         feedback, score = validator.validate()
         self.results.append("\n[4. EXPECTED OUTCOMES VALIDATION]\n")
@@ -140,7 +141,7 @@ class AbstractValidator:
             self.config["BLOOM_VERBS"],
             self.config["BLOOM_SYNONYMS"],
             self.weights["IMPACT"],
-            # domain_lexicon=self.domain_lexicon  # optional
+            # domain_lexicon=self.domain_lexicon  # opcional
         )
         feedback, score = validator.validate()
         self.results.append("\n[5. IMPACT VALIDATION]\n")
@@ -175,8 +176,24 @@ class AbstractValidator:
             else:
                 print(f"Warning: No keywords were detected in the abstract. Summary generated without keyword influence.")
        
-        summarizer = Summarizer(full_doc, keywords=self.keywords)
-        summary = summarizer.summarize()
+        struct_summarizer = StructuredSummarizer(
+            keywords=self.keywords,
+            max_chars_per_section=400,
+            prefix_labels=True
+        )
+        
+        summary = struct_summarizer.build_structured_summary(
+            background_doc=self.background_doc,
+            hypothesis_doc=self.hypothesis_doc,
+            methodology_doc=self.methodology_doc,
+            outcomes_doc=self.outcomes_doc,
+            impact_doc=self.impact_doc,
+            n_sent_background=1,
+            n_sent_hypothesis=1,
+            n_sent_methodology=2,
+            n_sent_outcomes=1,
+            n_sent_impact=1,
+        )
         self.results.append("\n[7. ABSTRACT SUMMARY]\n")
         self.results.append(summary)
     
