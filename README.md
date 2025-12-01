@@ -70,7 +70,7 @@ python -m spacy download en_core_web_sm
 ## How to Run
 From the root folder:
 ```bash
-python abstract_validator.py
+python abstract_validator.py --tag name_of_lexicon
 ```
 
 Make sure your input file (`abstract_file.txt`) inside `input_data/` follows this format:
