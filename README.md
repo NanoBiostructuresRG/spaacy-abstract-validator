@@ -126,13 +126,13 @@ Validation completed. Results saved to: output/output_results.txt
 ---
 
 ## Author
-Developed by **Flavio F. Contreras-Torres** (Tecnológico de Monterrey)
+Developed by **Flavio F. Contreras-Torres** (Tecnológico de Monterrey)      
 Monterrey, Mexico - November 2025
 
 ---
 
 ## Versions
-v.1.0.0 - April 2025. Oviedo, Spain
+v.1.0.0 - April 2025. Oviedo, Spain     
 v.1.1.0 - November 2025. Monterrey, Mexico
 
 ---
