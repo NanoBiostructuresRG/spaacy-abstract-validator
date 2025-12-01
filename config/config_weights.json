@@ -3,7 +3,8 @@
     "problem": 2,
     "justification": 2,
     "concept": 1,
-    "knowledge_gap": 3
+    "knowledge_gap": 3,
+    "domain": 2
   },
   "HYPOTHESIS": {
     "tone": 2,
